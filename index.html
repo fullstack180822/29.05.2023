@@ -20,14 +20,46 @@
       class App extends React.Component {
         state = {
             age: 30,
-            name: 'itay'
+            form_input : {
+                name: 'itay'
+            }
+        }
+        handleSubmit = (e) => {
+            e.preventDefault();
+            console.log('submit');
+            this.setState({
+                form_input: {
+                    name: document.getElementById("input_name").value
+                }
+            })            
+            
+        }
+        handleChange = (e) => {
+            console.log(e.target.value);
+            // DO NOT!
+            //this.state.form_input.name = e.target.value
+            this.setState({
+                form_input: {
+                    name: e.target.value
+                }
+            })
         }
         render()
         {
+            // 1 add input type number which changes the age only on submit
+            // 2 add input type number which changes the age only on each change
           return(
             <div className="app-content">
               <h1>Hello World!!</h1>
-              <p>My name is {this.state.name} and my age is {this.state.age}</p>
+              <p>My name is <b>{this.state.form_input.name}</b> and my age is <b>{this.state.age}</b></p>
+              <hr />
+              <form onSubmit={this.handleSubmit}>
+                <input type="text" id="input_name"
+                  //onChange={alert}
+                  //value={this.state.form_input.name} 
+                  required/>
+                <button type="submit">Submit</button>
+              </form>
             </div>
           )
         }
