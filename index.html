@@ -27,6 +27,8 @@
         handleSubmit = (e) => {
             e.preventDefault();
             console.log('submit');
+
+            // change on submit
             this.setState({
                 form_input: {
                     name: document.getElementById("input_name").value
@@ -38,6 +40,8 @@
             console.log(e.target.value);
             // DO NOT!
             //this.state.form_input.name = e.target.value
+
+            // change on each text change
             this.setState({
                 form_input: {
                     name: e.target.value
@@ -55,7 +59,7 @@
               <hr />
               <form onSubmit={this.handleSubmit}>
                 <input type="text" id="input_name"
-                  //onChange={alert}
+                  //onChange={this.handleChange}
                   //value={this.state.form_input.name} 
                   required/>
                 <button type="submit">Submit</button>
