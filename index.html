@@ -20,33 +20,24 @@
       class App extends React.Component {
         state = {
             age: 30,
-            form_input : {
-                name: 'itay'
+            name: 'itay'
+        }
+        handleClick = (e) => {
+            console.log(e);
+            console.log(this.state);
+            for(let f in e){
+                console.log(`${f} : ${e[f]}`);
             }
-        }
-        handleSubmit = (e) => {
-            e.preventDefault();
-            console.log('submit');
-
-            // change on submit
             this.setState({
-                form_input: {
-                    name: document.getElementById("input_name").value
-                }
-            })            
-            
-        }
-        handleChange = (e) => {
-            console.log(e.target.value);
-            // DO NOT!
-            //this.state.form_input.name = e.target.value
-
-            // change on each text change
-            this.setState({
-                form_input: {
-                    name: e.target.value
-                }
+                age: this.state.age + 1
             })
+        }
+        handleMouseOver = (e) => {
+            console.log(`(${e.pageX}, ${e.pageY})`);
+        }
+        handleCopy = (e) => {
+            console.log("try to be original for once ...");
+            alert("try to be original for once ...")
         }
         render()
         {
@@ -55,15 +46,16 @@
           return(
             <div className="app-content">
               <h1>Hello World!!</h1>
-              <p>My name is <b>{this.state.form_input.name}</b> and my age is <b>{this.state.age}</b></p>
+              <p onCopy={this.handleCopy}>My name is <b>{this.state.name} </b>
+                 and my age is <b>{this.state.age}</b></p>
               <hr />
-              <form onSubmit={this.handleSubmit}>
-                <p>name <input type="text" id="input_name"
-                  //onChange={this.handleChange}
-                  //value={this.state.form_input.name} 
-                  required/></p>
-                <button type="submit">Submit</button>
-              </form>
+              <button onClick={this.handleClick}>Click me</button>
+              <br />
+              <button 
+               onMouseOver={this.handleMouseOver}
+               onMouseLeave={(e) => {console.log("bye");}}>
+               <br />Hover me....
+               <br /></button>
             </div>
           )
         }
